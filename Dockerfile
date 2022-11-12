@@ -16,7 +16,7 @@ ENV HASURA_GRAPHQL_DEV_MODE=true
 ENV HASURA_GRAPHQL_ENABLE_TELEMETRY=false
 
 # List of experimental features to be enabled. A comma separated value is expected. Options: inherited_roles, naming_convention, streaming_subscriptions, hide_update_many_fields.
-ENV HASURA_GRAPHQL_EXPERIMENTAL_FEATURES=true
+ENV HASURA_GRAPHQL_EXPERIMENTAL_FEATURES=inherited_roles,naming_convention,streaming_subscriptions,hide_update_many_fields
 
 # A JSON string containing type and the JWK used for verifying (and other optional details). Example: {"type": "HS256", "key": "3bd561c37d214b4496d09049fadc542c"}. See the JWT docs for more details.
 # ENV HASURA_GRAPHQL_JWT_SECRET=
