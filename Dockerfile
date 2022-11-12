@@ -1,8 +1,5 @@
 FROM hasura/graphql-engine:v2.15.0
 
-ENV HASURA_GRAPHQL_DATABASE_URL=$DATABASE_URL
-ENV HASURA_GRAPHQL_SERVER_PORT=$PORT
-
 # Admin secret key, required to access this instance. This is mandatory when you use webhook or JWT.
 # ENV HASURA_GRAPHQL_ADMIN_SECRET=
 
@@ -24,4 +21,20 @@ ENV HASURA_GRAPHQL_EXPERIMENTAL_FEATURES=inherited_roles,naming_convention,strea
 # Set the logging level. Default: info. Options: debug, info, warn, error.
 ENV HASURA_GRAPHQL_LOG_LEVEL=info
 
-CMD graphql-engine serve
+# Change $DATABASE_URL to your heroku postgres URL if you're not using
+# the primary postgres instance in your app
+CMD graphql-engine \
+    --database-url $DATABASE_URL \
+    serve \
+    --server-port $PORT
+
+## Comment the command above and use the command below to
+## enable an access-key and an auth-hook
+## Recommended that you set the access-key as a environment variable in heroku
+#CMD graphql-engine \
+#    --database-url $DATABASE_URL \
+#    serve \
+#    --server-port $PORT \
+#    --access-key XXXXX \
+#    --auth-hook https://myapp.com/hasura-webhook 
+#
